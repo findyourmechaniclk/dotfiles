@@ -4,6 +4,7 @@ name: Checks
 # covered by eval-only checks; `.#lint` runs `nix flake check --all-systems`,
 # which evaluates them without building.
 on:
+  workflow_dispatch:
   push:
   pull_request:
   schedule:
