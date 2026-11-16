@@ -1,3 +1,8 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 1 optimization:
+# - [MEDIUM] Add concurrency group to "nix-eval.yml"
+# Estimated savings: ~2 min/run
+#
 name: Checks
 # The NixOS host has no hardware exercising it, so check every system to catch
 # regressions that local Darwin rebuilds would never surface. Darwin hosts are
@@ -9,6 +14,10 @@ on:
   pull_request:
   schedule:
     - cron: '0 6 * * 1'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions: {}
 jobs:
   checks:
